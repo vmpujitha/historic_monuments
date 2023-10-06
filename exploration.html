@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Historical Monuments in India</title>
+  <!-- Add Bootstrap CSS link here -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="base.html">Monument Encyclopedia</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto justify-content-end">
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h1 class="mb-4">Explore Historical Monuments in India</h1>
+
+    <!-- Forts Section -->
+    <h2>Forts</h2>
+    <div class="row" id="fortsSection">
+      <!-- Forts will be dynamically generated here -->
+    </div>
+
+    <!-- Museums Section -->
+    <h2>Museums</h2>
+    <div class="row" id="museumsSection">
+      <!-- Museums will be dynamically generated here -->
+    </div>
+
+    <!-- Tombs Section -->
+    <h2>Tombs</h2>
+    <div class="row" id="tombsSection">
+      <!-- Tombs will be dynamically generated here -->
+    </div>
+
+    <!-- Add more sections for other categories if needed -->
+
+  </div>
+
+  <!-- Add Bootstrap JS and other scripts here -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // The provided data of historical monuments
+    const monumentsData = {
+    		delhi: [
+			    {
+			      name: 'Red Fort',
+			      location: 'RedFort_delhi',
+			      image: 'https://c.ndtvimg.com/2021-10/iaff1n4c_red-fort-india-flag-istock-red-fort-generic_625x300_21_October_21.jpg?ver-20230616.03',
+			      description: 'The Red Fort is an iconic historical fort made of red sandstone, located in Delhi. It served as the main residence of the emperors of the Mughal dynasty for nearly 200 years. The fort is a UNESCO World Heritage Site and a significant symbol of India’s rich history and architectural brilliance.'
+			    },
+			    {
+			      name: 'Qutub Minar',
+			      location: 'QutubMinar_Delhi',
+			      image: 'https://indotoursadventures.com/public/storage/blogs/c08c82b13d64cbc5e0175b9e91b82e9c.jpg',
+			      description: 'Qutub Minar is a soaring tower of victory built in the early 13th century. It is one of the finest examples of Indo-Islamic architecture and stands as the tallest brick minaret in the world. The monument is a UNESCO World Heritage Site and a popular attraction among history enthusiasts and tourists alike.'
+			    },
+			    {
+			      name: 'Humayun\'s Tomb',
+			      location: 'Humayun\'sTomb_Delhi',
+			      image: 'https://s01.sgp1.cdn.digitaloceanspaces.com/article/169063-qcvstwzrmk-1642686041.jpg',
+			      description: 'Humayun\'s Tomb is a magnificent mausoleum built in the mid-16th century for the Mughal Emperor Humayun. It is an excellent example of Persian architecture and inspired the construction of the Taj Mahal. The tomb is a UNESCO World Heritage Site and a serene place to explore Delhi’s past and architectural grandeur.'
+			    },
+			    {
+			      name: 'Jama Masjid',
+			      location: 'JammaMasjid_Delhi',
+			      image: 'https://www.agrashivtourandtravels.com/wp-content/uploads/2020/06/jama-710x350.jpg',
+			      description: 'Jama Masjid is one of the largest and most renowned mosques in India. It was built by the Mughal Emperor Shah Jahan in the 17th century. The mosque’s impressive structure is made of red sandstone and white marble, and it can accommodate thousands of worshippers at once. Visitors can enjoy the breathtaking view of Delhi from its minarets.'
+			    }
+			  ],
+  mumbai: [
+    { name: 'Elephanta Caves', location: 'Elephanta-caves', image: 'https://roamtoindia.com/wp-content/uploads/2023/01/Elephanta_Caves_Front_view-1024x666.jpg' },
+    { name: 'Kanheri Caves', location: 'kanheri-caves', image: 'https://res.cloudinary.com/thrillophilia/image/upload/c_fill,f_auto,fl_progressive.strip_profile,g_auto,q_auto/v1/filestore/kw5kwwmjwnhwguftfechzirmhu55_shutterstock_603506636.jpg' },
+    { name: 'Chhatrapati Shivaji Terminus', location: 'chatrapathi-shivaji-terminus', image: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Chhatrapati_shivaji_terminus%2C_esterno_01.jpg' }
+  ],
+  jaipur: [
+    { name: 'Amber Fort', location: 'amber-fort', image: 'https://globalheritagefund.org/newdevghf/wp-content/uploads/2015/11/Amer_Fort_Entrance.jpg' },
+    { name: 'Hawa Mahal', location: 'hawa-mahal', image: 'https://images.moneycontrol.com/static-mcnews/2023/04/pexels-ankur-bagai-6440428-770x433.jpg?impolicy=website&width=770&height=431' },
+    { name: 'Jantar Mantar', location: 'jantar-mantar', image: 'https://jaipurtourism.co.in/images/places-to-visit/header/jantar-mantar-jaipur-entry-fee-timings-holidays-reviews-header.jpg' }
+  ],
+  agra: [
+    { name: 'Taj Mahal', location: 'taj-mahal', image: 'https://th-thumbnailer.cdn-si-edu.com/jzm3Sdi-A4nHAwY_q8LAoOVMKJc=/1072x720/filters:no_upscale():focal(1471x1061:1472x1062)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg' },
+    { name: 'Agra Fort', location: 'agra-fort', image: 'https://img.staticmb.com/mbcontent/images/uploads/2022/9/agra-fort.jpg' },
+    { name: 'Fatehpur Sikri', location: 'fathepur-sikhri', image: 'https://www.tajmahal.gov.in/images/gallery/january.jpg' }
+  ],
+  varanasi: [
+    { name: 'Kashi Vishwanath Temple', location: 'kashi-viswanath-temple', image: 'https://www.tajmahal.gov.in/images/gallery/january.jpg' },
+    { name: 'Sarnath', location: 'sarnath-varanasi', image: 'https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/mkhazfmalirikvq90dgu/Sarnath%20Buddhist%20Pilgrimage%20Tour%20from%20Varanasi.jpg' },
+    { name: 'Ramnagar Fort', location: 'ramnagar-fort', image: 'https://lp-cms-production.imgix.net/2019-06/GettyImages-148626827_large.jpg' }
+  ],
+  kolkata: [
+    { name: 'Victoria Memorial', location: 'victoria-memorial', image: 'https://www.trawell.in/admin/images/upload/555418532Victoria-Memorial-Kolkata.jpg' },
+    { name: 'Howrah Bridge', location: 'howrah-bridge', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Howrah_bridge_at_night.jpg/1200px-Howrah_bridge_at_night.jpg' },
+    { name: 'Indian Museum', location: 'indian-museum', image: 'https://www.trawell.in/admin/images/upload/555418834Kolkata_Indian_Museum_Main.jpg' }
+  ],
+  chennai: [
+    { name: 'Kapaleeshwarar Temple', location: 'kapileshwar-temple', image: 'https://www.trawell.in/admin/images/upload/555418834Kolkata_Indian_Museum_Main.jpg' },
+    { name: 'Fort St. George', location: 'fort-st-george', image: 'https://www.tourmyindia.com/states/tamilnadu/images/fort-st-Georges1-1.jpg' },
+    { name: 'Thousand Lights Mosque', location: 'thousand-lights-mosque', image: 'https://www.tourmyindia.com/states/tamilnadu/images/fort-st-Georges1-1.jpg' }
+  ],
+  udaipur: [
+    { name: 'City Palace', location: 'city-palace-udaipur', image: 'https://www.holidify.com/images/cmsuploads/compressed/3137_20190428132918.jpg' },
+    { name: 'Jag Mandir', location: 'jag-mandir-udaipur', image: 'https://udaipurtourism.co.in/images/places-to-visit/headers/jagmandir-isla-udaipur-indian-tourism-entry-fee-timings-holidays-reviews-header.jpg' },
+    { name: 'Sajjangarh Palace', location: 'sajjangarh-palace-Udaipur', image: 'https://www.holidify.com/images/cmsuploads/compressed/71_20190710185305.jpg' }
+  ],
+  mysore: [
+    { name: 'Mysore Palace', location: 'Mysore-palace', image: 'https://www.holidify.com/images/cmsuploads/compressed/71_20190710185305.jpg' },
+    { name: 'Chamundi Hills', location: 'chamundi-jills-Mysore', image: 'https://static.toiimg.com/thumb/msid-51680194,width=1200,height=900/51680194.jpg' },
+    { name: 'Jaganmohan Palace', location: 'jagan-mohan-Mysore', image: 'https://www.mysoretourism.org.in/images/headers/jaganmohan-palace-mysore-timings-entry-fee-mysore-tourism-header.jpg' }
+  ],
+  goa: [
+    { name: 'Basilica of Bom Jesus', location: 'Basilia-of-bom-jesus-Goa', image: 'https://static.toiimg.com/photo/92691434.cms' },
+    { name: 'Dudhsagar Falls', location: 'dudh-sagar-falls-Goa', image: 'https://img.veenaworld.com/wp-content/uploads/2021/07/Dudhsagar-Waterfalls-Goa-How-to-Reach-Timings-Tickets.jpeg' },
+    { name: 'Fort Aguada', location: 'fort-aguada-Goa', image: 'https://img.veenaworld.com/wp-content/uploads/2021/07/Dudhsagar-Waterfalls-Goa-How-to-Reach-Timings-Tickets.jpeg' }
+  ],
+  bengaluru: [
+    { name: 'Bangalore Palace', location: 'Bengaluru-palace', image: 'https://img.veenaworld.com/wp-content/uploads/2021/07/Dudhsagar-Waterfalls-Goa-How-to-Reach-Timings-Tickets.jpeg' },
+    { name: 'Lalbagh Botanical Garden', location: 'lalbagh-botanical-garden-Bengaluru', image: 'https://img.veenaworld.com/wp-content/uploads/2021/07/Dudhsagar-Waterfalls-Goa-How-to-Reach-Timings-Tickets.jpeg' },
+    { name: 'Vidhana Soudha', location: 'vidhana-soudha-Bengaluru', image: 'https://assets-news.housing.com/news/wp-content/uploads/2020/12/01163300/Bengaluru%E2%80%99s-Vidhana-Soudha-could-be-worth-over-Rs-3900-crores-FB-1200x700-compressed.jpg' }
+  ],
+  hyderabad: [
+    { name: 'Charminar', location: 'charminar-Hyderabad', image: 'https://t3.ftcdn.net/jpg/03/97/74/64/360_F_397746410_YP1kxMSzQUhzDrlXCGu9wpKeDakisHjH.jpg' },
+    { name: 'Golconda Fort', location: 'golconda-fort-Hyderabad', image: 'https://assets-news.housing.com/news/wp-content/uploads/2020/11/02184143/Everything-you-need-to-know-about-Golconda-Fort-FB-1200x700-compressed.jpg' },
+    { name: 'Qutb Shahi Tombs', location: 'qutub-shahi-tombs-Hyderabad', image: 'https://cdn.s3waas.gov.in/s36c524f9d5d7027454a783c841250ba71/uploads/bfi_thumb/2018110252-olwa22zfaya16ynaffhly1710hs8kblv0xipzaehl6.jpg' }
+  ],
+  ahmedabad: [
+    { name: 'Adalaj Stepwell', location: 'adalaj-steepwell-Ahmedabad', image: 'https://www.travelviewpoint.com/wp-content/uploads/2021/12/The-beautiful-Step-well-of-Adalaj-Ahmadabad-rann-utsav..jpg' },
+    { name: 'Sidi Saiyyed Mosque', location: 'siddi-saiyyed-mosque-Ahmedabad', image: 'https://ahmedabadtourism.in/images/places-to-visit/headers/sidi-saiyed-mosque-ahmedabad-tourism-entry-fee-timings-holidays-reviews-header.jpg' }
+  ],
+  lucknow: [
+    { name: 'Bara Imambara', location: 'bara-imambara-Lucknow', image: 'https://static.toiimg.com/photo/38469547.cms' },
+    { name: 'Chota Imambara', location: 'chota-Imambara-Lucknow', image: 'https://upload.wikimedia.org/wikipedia/commons/f/fd/Chhota_imambara_Lucknow.jpg' },
+    { name: 'Rumi Darwaza', location: 'Rumi-Drawaza-Lucknow', image: 'https://i.pinimg.com/originals/ec/4d/2d/ec4d2d7235582d50a4e2eb167b3d6563.jpg' }
+  ],
+  bhubaneswar: [
+    { name: 'Lingaraj Temple', location: 'lingraj-temple-Bhubaneswar', image: 'https://static.toiimg.com/photo/85762632.cms' },
+    { name: 'Udayagiri and Khandagiri Caves', location: 'udayagiri-and-khandagiri-caves-Bhubaneswar', image: 'https://upload.wikimedia.org/wikipedia/commons/7/72/Khandagari_and_Udaygiri_featured_image.jpg' },
+    { name: 'Dhauli Giri', location: 'Bhubaneswar', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Dhauli-Giri-Shanti-Stupa-Bhubaneswar-Orissa.jpg' }
+  ],
+  amritsar: [
+    { name: 'Golden Temple', location: 'golden-temple-Amritsar', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/The_Golden_Temple_of_Amrithsar_7.jpg/800px-The_Golden_Temple_of_Amrithsar_7.jpg' },
+    { name: 'Jallianwala Bagh', location: 'jallianwala-bagh-Amritsar', image: 'https://m.economictimes.com/thumb/msid-99456355,width-1805,height-1280,resizemode-4,imgsize-343356/jallianwala-bagh-massacres-104th-anniversary-what-happened-why-should-we-always-remember-this-day.jpg' },
+    { name: 'Wagah Border', location: 'wagah-border-Amritsar', image: 'https://amritsartourism.org.in/images/places-to-visit/headers/wagah-border-amritsar-tourism-entry-fee-timings-holidays-reviews-header.jpg' }
+  ],
+  madurai: [
+    { name: 'Meenakshi Amman Temple', location: 'meenakshi-amman-temple-Madurai', image: 'https://www.tourmyindia.com/states/tamilnadu/images/meenakshi-temple1-1.jpg' },
+    { name: 'Thirumalai Nayakkar Palace', location: 'thirumalai-nayakkar-palace-Madurai', image: 'https://myholidayhappiness.com/uploads/b1cd19a07edb58e0ba755cd6952e283a.jpg' },
+    { name: 'Gandhi Memorial Museum', location: 'gandhi-memorial-museum-Madurai', image: 'https://www.tamilnadutourism.tn.gov.in/img/pages/large-desktop/gandhi-memorial-museum-1656251863_6a06cb3cd71b7291dc30.webp' }
+  ],
+  hampi: [
+    { name: 'Virupaksha Temple', location: 'virupaksha-temple-Hampi', image: 'https://www.karnataka.com/wp-content/uploads/2011/06/virupaksha-temple-hampi.jpg' },
+    { name: 'Vittala Temple', location: 'vittala-temple-Hampi', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Vittala_Temple_-_Hampi_-_Karnataka.jpg/2560px-Vittala_Temple_-_Hampi_-_Karnataka.jpg' },
+  ],
+  khajuraho: [
+    { name: 'Khajuraho Temples', location: 'khajuraho-temple-Khajuraho', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Vittala_Temple_-_Hampi_-_Karnataka.jpg/2560px-Vittala_Temple_-_Hampi_-_Karnataka.jpg' },
+    { name: 'Kandariya Mahadeva Temple', location: 'kandariya-mahadeva-temple-Khajuraho', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Vittala_Temple_-_Hampi_-_Karnataka.jpg/2560px-Vittala_Temple_-_Hampi_-_Karnataka.jpg' },
+    { name: 'Lakshmana Temple', location: 'lakshmana-temple-Khajuraho', image: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Khajuraho-Lakshmana_temple.JPG' }
+  ],
+  ellora: [
+    { name: 'Kailash Temple', location: 'kailash-temple-Ellora', image: 'https://static.toiimg.com/thumb/66499582.cms?resizemode=75&width=1200&height=900' },
+    { name: 'Cave 16 (Dasavatara Temple)', location: 'cave-16-dasavatara-temple-Ellora', image: 'https://1.bp.blogspot.com/-GRsvtZWIFSg/XQXqKdIDZhI/AAAAAAABX3E/wlhTKj7A6TQ2HkcHtEcU0jNdJmvZljpkQCKgBGAs/s1600/00.JPG' },
+    { name: 'Cave 32 (Indra Sabha)', location: 'indra-sabha-Ellora', image: 'https://1.bp.blogspot.com/-GRsvtZWIFSg/XQXqKdIDZhI/AAAAAAABX3E/wlhTKj7A6TQ2HkcHtEcU0jNdJmvZljpkQCKgBGAs/s1600/00.JPG' }
+  ]
+  };
+
+    // Function to generate the list of monuments for a given category
+    function generateMonumentCards(category, cityMonuments) {
+      const sectionId = `${category.toLowerCase()}Section`;
+      const monumentSection = document.getElementById(sectionId);
+      monumentSection.innerHTML = `<h2>${category}</h2>`;
+
+      for (const monument of cityMonuments) {
+        const monumentCard = `
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="${monument.image}" class="card-img-top" alt="${monument.name}">
+              <div class="card-body">
+                <h5 class="card-title">${monument.name}</h5>
+                <p class="card-text">${monument.description}</p>
+                <a href="${monument.location}.html" class="btn btn-primary">Learn More</a>
+              </div>
+            </div>
+          </div>
+        `;
+        monumentSection.innerHTML += monumentCard;
+      }
+    }
+
+    // Call the function with the data for each category
+    generateMonumentCards('Forts', monumentsData.delhi);
+    generateMonumentCards('Museums', monumentsData.mumbai);
+    generateMonumentCards('Tombs', monumentsData.jaipur);
+    generateMonumentCards('Forts', monumentsData.agra);
+    generateMonumentCards('Tombs', monumentsData.varanasi);
+    generateMonumentCards('Museums', monumentsData.kolkata);
+    generateMonumentCards('Temples', monumentsData.chennai);
+    generateMonumentCards('Palaces', monumentsData.udaipur);
+    generateMonumentCards('Palaces', monumentsData.mysore);
+    generateMonumentCards('Temples', monumentsData.goa);
+    generateMonumentCards('Palaces', monumentsData.bengaluru);
+    generateMonumentCards('Forts', monumentsData.hyderabad);
+    generateMonumentCards('Mosques', monumentsData.ahmedabad);
+    generateMonumentCards('Imambaras', monumentsData.lucknow);
+    generateMonumentCards('Temples', monumentsData.bhubaneswar);
+    generateMonumentCards('Gurudwaras', monumentsData.amritsar);
+    generateMonumentCards('Temples', monumentsData.madurai);
+    generateMonumentCards('Temples', monumentsData.hampi);
+    generateMonumentCards('Temples', monumentsData.khajuraho);
+    generateMonumentCards('Temples', monumentsData.ellora);
+
+  </script>
+</body>
+</html>
